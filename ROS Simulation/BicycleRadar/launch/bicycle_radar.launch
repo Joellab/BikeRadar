@@ -1,0 +1,21 @@
+<launch>
+    <env name="GAZEBO_MODEL_PATH" value="$(find autonomous_bicycle)/models"/>
+
+    <param name="use_sim_time" value="true" />
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+        <arg name="world_name" value="$(find autonomous_bicycle)/worlds/bicycle.world"/>
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="false"/>
+        <arg name="gui" value="true"/>
+        <arg name="headless" value="false"/>
+        <arg name="debug" value="false"/>
+        <arg name="physics" default="ode"/>
+        <arg name="respawn_gazebo" default="false"/>
+        <arg name="verbose" default="false"/>
+    </include>
+
+    <arg name="frequency" default="5" />
+    <node name="static_tf_pub_world_to_gazebo_world" pkg="tf" type="static_transform_publisher" args="0 0 0  0 0 0 1 world gazebo_world 100" />
+
+</launch>
